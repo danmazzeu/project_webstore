@@ -2,25 +2,27 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 
 const app = express();
-app.use(express.json()); // Middleware para interpretar JSON no corpo da requisição
 
 // Configuração do Nodemailer (substitua com suas credenciais)
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Ou outro serviço de email
+  service: 'gmail',
   auth: {
     user: 'danmazzeu9@gmail.com',
     pass: '%448600%55Dd'
   }
 });
 
-app.post('/enviar_email', (req, res) => {
-  const { destinatario, assunto, mensagem } = req.body;
+// Middleware para interpretar os dados da URL (query string)
+app.use(express.urlencoded({ extended: true })); // Habilita a interpretação de query string
+
+app.get('/enviar_email', (req, res) => { // Mudança para app.get
+  const { destinatario, assunto, mensagem } = req.query; // Dados da URL
 
   const mailOptions = {
     from: 'danmazzeu9@gmail.com',
-    to: 'danmazzeu9@gmail.com',
-    subject: 'subject',
-    text: 'teste'
+    to: 'danmazzeu9@gmail.com', // Usa o destinatário da URL
+    subject: 'oi', // Usa o assunto da URL
+    text: 'teste' // Usa a mensagem da URL
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
