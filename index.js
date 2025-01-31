@@ -3,13 +3,15 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 
-// Configuração do Nodemailer (substitua com suas credenciais)
 const transporter = nodemailer.createTransport({
-  service: 'yahoo',
+  pool: true,
+  host: "smtp.mail.yahoo.com",
+  port: 465,
+  secure: true, // use TLS
   auth: {
-    user: 'danmazzeu9@yahoo.com',
-    pass: '%448600%55Dd'
-  }
+    user: "danmazzeu9@yahoo.com",
+    pass: "%448600%55Dd",
+  },
 });
 
 // Middleware para interpretar os dados da URL (query string)
