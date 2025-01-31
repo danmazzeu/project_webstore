@@ -5,9 +5,9 @@ const app = express();
 
 // Configuração do Nodemailer (substitua com suas credenciais)
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'yahoo',
   auth: {
-    user: 'danmazzeu9@gmail.com',
+    user: 'danmazzeu9@yahoo.com',
     pass: '%448600%55Dd'
   }
 });
@@ -19,7 +19,7 @@ app.get('/enviar_email', (req, res) => { // Mudança para app.get
   const { destinatario, assunto, mensagem } = req.query; // Dados da URL
 
   const mailOptions = {
-    from: 'danmazzeu9@gmail.com',
+    from: 'danmazzeu9@yahoo.com',
     to: 'danmazzeu9@gmail.com', // Usa o destinatário da URL
     subject: 'oi', // Usa o assunto da URL
     text: 'teste' // Usa a mensagem da URL
