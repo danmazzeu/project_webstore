@@ -1,5 +1,5 @@
 import express from 'express';
-import { enviarEmail } from './sendmail.js';
+import { enviarEmail } from './sendmail';
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
