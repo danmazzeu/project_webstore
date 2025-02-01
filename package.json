@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2", // Or a more recent version
-    "nodemailer": "^6.10.0" // Or a more recent version
+    "express": "^4.21.2",
+    "nodemailer": "^6.10.0"
   }
 }
