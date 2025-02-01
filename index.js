@@ -69,7 +69,7 @@ app.get('/sendmail', (req, res) => {
 });
 
 // Usage 
-// https://codesnode-production.up.railway.app/decrypt?message=IV:mensagem_criptografada
+// https://codesnode-production.up.railway.app/decrypt?message=chave:mensagem_criptografada
 
 app.get('/decrypt', (req, res) => {
   const { message } = req.query;
