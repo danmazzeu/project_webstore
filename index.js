@@ -28,11 +28,15 @@ app.get('/enviar_email', (req, res) => { // Mudança para app.get
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error('Erro ao enviar email:', error);
-      res.status(500).json({ mensagem: 'Erro ao enviar email' });
+      console.error('Error sending email:', error);
+      res.status(500).json({
+        mensagem: 'Erro ao enviar email',
+        erro: error.message, // Include the error message
+        errorDetails: error // Include the whole error object (for debugging)
+      });
     } else {
-      console.log('Email enviado:', info.response);
-      res.json({ mensagem: 'Email enviado com sucesso' });
+      console.log('Email sent:', info.response);
+      res.json({ mensagem: 'Email enviado com sucesso', info: info.response });
     }
   });
 });
