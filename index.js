@@ -4,7 +4,6 @@ const nodemailer = require('nodemailer');
 const app = express();
 
 const transporter = nodemailer.createTransport({
-  pool: true,
   host: "smtp.mail.yahoo.com",
   port: 465,
   secure: true, // use TLS
@@ -22,9 +21,9 @@ app.get('/enviar_email', (req, res) => { // Mudança para app.get
 
   const mailOptions = {
     from: 'danmazzeu9@yahoo.com',
-    to: 'danmazzeu9@gmail.com', // Usa o destinatário da URL
-    subject: 'oi', // Usa o assunto da URL
-    text: 'teste' // Usa a mensagem da URL
+    to: destinatario, // Usa o destinatário da URL
+    subject: assunto, // Usa o assunto da URL
+    text: mensagem // Usa a mensagem da URL
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
