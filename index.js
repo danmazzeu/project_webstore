@@ -1,5 +1,5 @@
-const express = require('express');
-const { enviarEmail } = require('./sendmail');
+import express from 'express';
+import { enviarEmail } from './sendmail.mjs';
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
