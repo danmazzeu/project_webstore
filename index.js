@@ -7,6 +7,15 @@ const email = 'danmazzeu9@gmail.com';
 const password = "fpgq mbja jnkv ejws";
 const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
 
+const express = require('express');
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://danmazzeu.github.io');
+    res.header('Access-Control-Allow-Methods', 'GET, POST');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
 function encrypt(text) {
     const iv = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY, 'hex'), iv);
@@ -16,24 +25,24 @@ function encrypt(text) {
 }
 
 function decrypt(text) {
-  const textParts = text.split(':');
-  const iv = Buffer.from(textParts.shift(), 'hex');
-  const encryptedText = Buffer.from(textParts.join(':'), 'hex');
-  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY, 'hex'), iv);
-  let decrypted = decipher.update(encryptedText);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-  return decrypted.toString();
+    const textParts = text.split(':');
+    const iv = Buffer.from(textParts.shift(), 'hex');
+    const encryptedText = Buffer.from(textParts.join(':'), 'hex');
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY, 'hex'), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
 }
 
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: email,
-    pass: password,
-  },
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: email,
+      pass: password,
+    },
 });
 
 app.use(express.urlencoded({ extended: true }));
