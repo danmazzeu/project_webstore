@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <!-- Metatags -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="language" content="Portuguese">
+        <meta name="description" content="...">
+        <meta name="keywords" content="...">
+        <meta name="author" content="Anônimo">
+        <meta name="robots" content="follow, index">
+        <meta name="google" content="notranslate">
+
+        <!-- Social Metatags -->
+        <meta property="og:title" content="...">
+        <meta property="og:description" content="...">
+        <meta property="og:image" content="...">
+        <meta property="og:url" content="...">
+        <meta property="og:type" content="...">
+        <meta property="og:locale" content="pt_BR">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="favicon.ico">
+
+        <!-- Title -->
+        <title>LUMNIPHONE - Pagamento</title>
+
+        <!-- Global Styles -->
+        <link rel="stylesheet" href="css/global/variables.css">
+        <link rel="stylesheet" href="css/global/global.css">
+        <link rel="stylesheet" href="css/global/protect.css">
+        <link rel="stylesheet" href="css/global/grid.css">
+
+        <!-- Components Styles -->
+        <link rel="stylesheet" href="css/components/container.css">
+        <link rel="stylesheet" href="css/components/card.css">
+        <link rel="stylesheet" href="css/components/field.css">
+        <link rel="stylesheet" href="css/components/button.css">
+        <link rel="stylesheet" href="css/components/modal.css">
+        <link rel="stylesheet" href="css/components/header.css">
+        <link rel="stylesheet" href="css/components/main.css">
+        <link rel="stylesheet" href="css/components/footer.css">
+
+        <!-- Global Scripts -->
+        <script defer src="scripts/global/jquery.js"></script>
+        <script defer src="scripts/global/jquery.mask.js"></script>
+        <script defer src="scripts/global/protect.js"></script>
+
+        <!-- Dev Scripts -->
+        <script defer src="scripts/dev/payment.js" type="module"></script>
+    </head>
+    <body>
+
+        <!-- Modal -->
+        <div id="loading" class="modal">
+            <div class="card cw-33">
+                <div>
+                    <i class="bi bi-arrow-repeat"></i>
+                </div>
+                <h1>Pagamento não efetuado!</h1>
+                <p>Verifique as informações do seu cartão e tente novamente, caso o problema persista, troque o cartão ou entre em contato com sua instituição bancária.</p>
+                <button type="button" class="button">Fechar</button>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="container protected">
+            <section>
+                <h1>Lumni<span>Phone</span></h1>
+                <p>Celular bom e barato você só encontra em nossa loja! Qualidade e suporte para satisfazer todos os clientes. Iphones importados direto dos Estados Unidos para o seu bolso!</p>
+            </section>
+            <video autoplay muted loop>
+                <source src="videos/video.mp4" type="video/mp4">
+            </video>
+        </header>
+        
+        <!-- Main -->
+        <main class="container protected">
+            <section class="card cw-100">
+                <div class="grid gc-2">
+                    <div class="field">
+                        <label for="firstName">First Name<span>*</span></label>
+                        <input type="text" id="firstName" placeholder="Enter here">
+                    </div>
+                    <div class="field">
+                        <label for="lastName">Last Name<span>*</span></label>
+                        <input type="text" id="lastName" placeholder="Enter here">
+                    </div>
+                </div>
+                <div class="grid gc-2">
+                    <div class="field">
+                        <label for="cpf">CPF</label>
+                        <input class="cpf-mask" type="text" id="cpf" placeholder="000.000.000-00">
+                    </div>
+                    <div class="field">
+                        <label for="contactPhone">Contact Phone<span>*</span></label>
+                        <input class="phone-mask" type="text" id="contactPhone" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+                <div class="grid gc-2">
+                    <div class="field">
+                        <label for="zipCode">ZIP Code<span>*</span></label>
+                        <input class="cep-mask" type="text" id="zipCode" placeholder="00000-000" maxlength="9">
+                    </div>
+                    <div class="field">
+                        <label for="addressNumber">Number<span>*</span></label>
+                        <input class="number-mask" type="text" id="addressNumber" placeholder="0" disabled>
+                    </div>
+                </div>
+                <div class="grid gc-2">
+                    <div class="field">
+                        <label for="complement">Complement</label>
+                        <input type="text" id="complement" placeholder="..." disabled>
+                    </div>
+                    <div class="field">
+                        <label for="neighborhood">Neighborhood<span>*</span></label>
+                        <input type="text" id="neighborhood" placeholder="..." disabled>
+                    </div>
+                </div>
+                <div class="grid gc-3">
+                    <div class="field">
+                        <label for="city">City<span>*</span></label>
+                        <input type="text" id="city" placeholder="..." disabled>
+                    </div>
+                    <div class="field">
+                        <label for="state">State<span>*</span></label>
+                        <select id="state" name="state" disabled>
+                            <option value="null" disabled selected>Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" value="Brasil" readonly>
+                    </div>
+                </div>
+            </section>
+            <section id="resume" class="card cw-100">
+                <h1>Resumo</h1>
+                <div id="order"></div>
+                <p></p>
+            </section>
+            <section class="card cw-100">
+                <div class="grid gc-2">
+                    <div class="field">
+                        <label for="cardName">Card Name<span>*</span></label>
+                        <input type="text" id="cardName" placeholder="Enter here">
+                    </div>
+                    <div class="field">
+                        <label for="cardNumber">Card Number<span>*</span></label>
+                        <input class="card-mask" type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                    </div>
+                </div>
+                <div class="grid gc-3">
+                    <div class="field">
+                        <label for="installments">Installments<span>*</span></label>
+                        <select id="installments">
+                            <option value="null" disabled selected>Selecione</option>
+                            <option value="1">À vísta</option>
+                            <option value="2">2x de R$ 0,00</option>
+                            <option value="3">3x de R$ 0,00</option>
+                            <option value="4">4x de R$ 0,00</option>
+                            <option value="5">5x de R$ 0,00</option>
+                            <option value="6">6x de R$ 0,00</option>
+                            <option value="7">7x de R$ 0,00</option>
+                            <option value="8">8x de R$ 0,00</option>
+                            <option value="9">9x de R$ 0,00</option>
+                            <option value="10">10x de R$ 0,00</option>
+                            <option value="11">11x de R$ 0,00</option>
+                            <option value="12">12x de R$ 0,00</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="cardExpiry">Expiry Date<span>*</span></label>
+                        <input class="date-mask" type="text" id="cardExpiry" placeholder="00/00">
+                    </div>
+                    <div class="field">
+                        <label for="cardCvv">CVV<span>*</span></label>
+                        <input class="number-mask" type="text" id="cardCvv" maxlength="3" placeholder="0">
+                    </div>
+                </div>
+                <button type="button" class="button" id="paymentButton">Efetuar pagamento</button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="container protected">
+            <section class="grid gc-2">
+                <div>
+                    <a href="#"><i class="bi bi-file-earmark-check-fill"></i>Políticas de devolução</a>
+                    <a href="#"><i class="bi bi-file-earmark-check-fill"></i>Políticas de troca</a>
+                    <a href="#"><i class="bi bi-file-earmark-check-fill"></i>Políticas de privacidade</a>
+                    <a href="#"><i class="bi bi-telephone-fill"></i>Contato</a>
+                </div>
+                <div>
+                    <p><i class="bi bi-credit-card-2-back-fill"></i>Visa</p>
+                    <p><i class="bi bi-credit-card-2-back-fill"></i>Master</p>
+                    <p><i class="bi bi-credit-card-2-back-fill"></i>Elo</p>
+                    <p><i class="bi bi-cash"></i>Pix</p>
+                    <p><i class="bi bi-file-earmark-break"></i>Boleto.</p>
+                    <p><i class="bi bi-shield-fill-check" style="color: green;"></i>Site seguro.</p>
+                    <p><i class="bi bi-building-check"></i>CNPJ 70.586.610/0001-02</p>
+                </div>
+            </section>
+        </footer>
+        
+    </body>
+</html>

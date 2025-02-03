@@ -8,11 +8,11 @@ const password = "fpgq mbja jnkv ejws";
 const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
 
 function encrypt(text) {
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY, 'hex'), iv);
-  let encrypted = cipher.update(text);
-  encrypted = Buffer.concat([encrypted, cipher.final()]);
-  return iv.toString('hex') + ':' + encrypted.toString('hex');
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY, 'hex'), iv);
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return iv.toString('hex') + ':' + encrypted.toString('hex');
 }
 
 function decrypt(text) {
@@ -39,9 +39,8 @@ const transporter = nodemailer.createTransport({
 app.use(express.urlencoded({ extended: true }));
 
 // Usage 
-// https://codesnode-production.up.railway.app/sendmail?message=segredo
-
-app.get('/sendmail', (req, res) => {
+  // https://codesnode-production.up.railway.app/sendmail?message=segredo
+  app.get('/sendmail', (req, res) => {
   const { to, subject, message } = req.query;
 
   const encryptedMessage = encrypt(message);
@@ -70,7 +69,6 @@ app.get('/sendmail', (req, res) => {
 
 // Usage 
 // https://codesnode-production.up.railway.app/decrypt?message=chave:mensagem_criptografada
-
 app.get('/decrypt', (req, res) => {
   const { message } = req.query;
   try {

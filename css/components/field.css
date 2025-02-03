@@ -1,0 +1,33 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.field > label {
+    font-weight: 600;
+}
+
+.field > label > span {
+    font-size: 13px;
+    vertical-align: middle;
+    font-weight: 900;
+    color: red;
+    margin-left: 3px;
+}
+
+.field > input,
+.field > select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    text-transform: uppercase;
+}
+
+.field > input.error,
+.field > select.error {
+    border: 2px solid red;
+}

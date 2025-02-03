@@ -1,0 +1,12 @@
+img {
+    align-self: center;
+    justify-self: center;
+    width: 80%;
+    max-height: 250px;
+    margin: 15px 0;
+    object-fit: contain;
+}
+
+img.plus {
+    max-height: 500px;
+}

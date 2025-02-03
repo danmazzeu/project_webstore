@@ -1,0 +1,40 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.modal > .card > div {
+    position: relative;
+}
+
+.modal > .card > div > i {
+    color: #777;
+    display: inline-block;
+    font-size: 50px;
+    animation: rotate 1s linear infinite;
+    transform-origin: center center;
+}
+
+.modal > .card > h1 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+
+}
+
+@keyframes rotate {
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+}

@@ -1,0 +1,19 @@
+main h1 {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+main span {
+    font-size: 25px;
+    font-weight: 1000;
+}
+
+main p {
+    line-height: 20px;
+    padding: 10px 0;
+    height: 100%;
+    border-radius: 5px;
+    border-top: 1px dashed #ccc;
+    border-bottom: 1px dashed #ccc;
+}

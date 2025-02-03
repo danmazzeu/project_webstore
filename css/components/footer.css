@@ -1,0 +1,44 @@
+footer {
+    border-top: 1px dashed #ccc;
+    padding-top: 30px;
+}
+  
+footer div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-start;
+}
+  
+footer div:nth-child(2) {
+    justify-content: flex-end;
+}
+  
+footer a { 
+    color: #333;
+    text-decoration: underline;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+footer p {
+    color: #999;
+    text-shadow: 1px 1px 1px #fff;
+}
+  
+footer a:hover,
+footer a:hover i {
+    color: #000;
+}
+  
+footer i {
+    margin-right: 6px;
+}
+
+@media (max-width: 768px) {
+    footer div,
+    footer div:nth-child(2) { 
+        align-items: center;
+        justify-content: center;
+    }
+    footer div:nth-child(2) { margin-top: 30px; }
+}
