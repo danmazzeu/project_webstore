@@ -65,13 +65,7 @@ zipCodeInput.addEventListener('input', function() {
 
 const paymentButton = document.getElementById('paymentButton');
 
-paymentButton.addEventListener('click', async (event) => {
-    event.preventDefault();
-
-    if (!validateForm()) {
-        return;
-    }
-
+paymentButton.addEventListener('click', async () => {
     try {
         const formData = new URLSearchParams();
         const fields = document.querySelectorAll('input, select');
