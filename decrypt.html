@@ -42,7 +42,11 @@
                     return;
                 }
         
-                window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${encText}`;
+                const parts = encText.split(':');
+                const key = parts[0].trim();
+                const message = parts[1].trim();
+        
+                window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
             });
         </script>
     </body>
