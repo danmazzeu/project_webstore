@@ -32,8 +32,10 @@
             });
         
             console.log("Pare de bisbilhotar, não há nada aqui para você.");
+
+            const btn = document.getElementById('btn');
         
-            document.getElementById('btn').addEventListener('click', function() {
+            btn.addEventListener('click', function() {
                 const encText = document.getElementById('enc').value;
         
                 if (encText.trim() === "") {
