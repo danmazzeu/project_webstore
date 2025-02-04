@@ -98,7 +98,7 @@ app.get('/decrypt', (req, res) => {
               return res.status(400).send("Message parameter is missing")
           }
           const decryptedMessage = decrypt(message);
-          res.send(`Decrypted message: ${decryptedMessage}`);
+          res.send(`${decryptedMessage}`);
 
     } catch (error) {
           console.error("Error decrypting:", error);
