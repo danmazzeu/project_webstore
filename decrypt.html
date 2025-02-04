@@ -51,14 +51,15 @@
 
         btn.addEventListener('click', function() {
             const encText = document.getElementById('enc').value;
+            const newEncText = encText.trim();
 
-            if (encText.trim() === "") {
+            if (newEncText == "") {
                 return;
             }
 
             const key = parts[0];
             const message = parts[1];
-            const url = `https://codesnode-production.up.railway.app/decrypt?message=${encText}`;
+            const url = `https://codesnode-production.up.railway.app/decrypt?message=${newEncText}`;
             window.location.href = url;
         });
     </script>
