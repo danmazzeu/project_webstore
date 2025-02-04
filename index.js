@@ -25,6 +25,7 @@ function decrypt(text) {
   return decrypted.toString();
 }
 
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -36,48 +37,34 @@ const transporter = nodemailer.createTransport({
 });
 
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
-const allowedOrigins = [
-    'https://danmazzeu.github.io/',
-    'http://localhost:3000',
-];
+// Usage 
+  // https://codesnode-production.up.railway.app/sendmail?message=segredo
+  app.get('/sendmail', (req, res) => {
+  const { message } = req.query;
 
-app.use(cors({
-  origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-      } else {
-          callback(new Error('Not allowed by CORS'));
-      }
-  }
-}));
+  const encryptedMessage = encrypt(message);
 
-app.post('/sendmail', (req, res) => { 
-    const { to, subject, message, ...otherFields } = req.body;
+  const mailOptions = {
+    from: email,
+    to: email,
+    subject: subject || 'Mensagem Criptografada',
+    text: encryptedMessage
+  };
 
-    if (!message) {
-        return res.status(400).json({ error: 'Message is required.' });
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      res.status(500).json({
+        message: 'Error sending email',
+        erro: error.message,
+        errorDetails: error
+      });
+    } else {
+      console.log('Email sent:', info.response);
+      res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
     }
-
-    const encryptedMessage = encrypt(message);
-
-    const mailOptions = {
-        from: email,
-        to: email,
-        subject: subject || 'Encrypted Message',
-        text: encryptedMessage
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error sending email:', error);
-            res.status(500).json({ error: 'Error sending email', details: error.message });
-        } else {
-            console.log('Email sent:', info.response);
-            res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
-        }
-    });
+  });
 });
 
 // Usage 
