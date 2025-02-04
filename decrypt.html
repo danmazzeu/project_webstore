@@ -1,51 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="language" content="Portuguese">
-        <meta name="robots" content="nofollow, noindex, noarchive">
-        <title>LUMNIPHONE</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="language" content="Portuguese">
+    <meta name="robots" content="nofollow, noindex, noarchive">
+    <title>LUMNIPHONE</title>
 
-        <style>
-            body {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-                padding: 20px;
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            font-family: sans-serif;
+        }
+      .protected {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        input[type="text"] {
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            width: fit-content; 
+            padding: 10px 15px; 
+            border: 0; 
+            background-color: #333; 
+            color: #fff; 
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <input id="enc" type="text" placeholder="Encrypted message (key:message)" >
+    <button id="btn" type="button">Decrypt</button>
+
+    <script>
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+        });
+        console.log("Pare de bisbilhotar, não há nada aqui para você.");
+
+        const btn = document.getElementById('btn');
+
+        btn.addEventListener('click', function() {
+            const encText = document.getElementById('enc').value;
+
+            if (encText.trim() === "") {
+                return;
             }
-            .protected {
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
+
+            const parts = encText.split(':');
+            if (parts.length!== 2) {
+                return;
             }
-        </style>
-    </head>
-    <body>
-        <input id="enc" type="text" placeholder="Encrypted message" style="width: 100%; padding: 10px; border: 1px solid #ccc;">
-        <button id="btn" type="button" style="width: fit-content; padding: 10px 15px; border: 0; background-color: #333; color: #fff; cursor: pointer;">Decrypt</button>
 
-        <script>
-            document.addEventListener('contextmenu', (event) => {
-                event.preventDefault();
-            });
-            console.log("Pare de bisbilhotar, não há nada aqui para você.");
-
-            const btn = document.getElementById('btn');
-        
-            btn.addEventListener('click', function() {
-                const encText = document.getElementById('enc').value;
-        
-                if (encText.trim() === "") {
-                    return;
-                } else {
-                    const parts = encText.split(':');
-                    const key = parts[0].trim();
-                    const message = parts[1].trim();
-                    window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
-                }
-            });
-        </script>
-    </body>
+            const key = parts.trim();
+            const message = parts.trim();
+            const url = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
+            window.location.href = url;
+        });
+    </script>
+</body>
 </html>
