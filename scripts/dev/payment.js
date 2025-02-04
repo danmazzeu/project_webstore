@@ -71,6 +71,21 @@ paymentButton.addEventListener('click', async (event) => {
         return;
     }
 
+    const loading = document.getElementById('loading')
+    loading.style.display = 'flex';
+    loading.querySelector('h1').textContent = 'Analisando...';
+    loading.querySelector('p').style.display = 'none';
+
+    setTimeout( function () {
+        loading.querySelector('h1').textContent = 'Pagamendo não efetuado.';
+        loading.querySelector('i').style.display = 'none';
+        loading.querySelector('p').style.display = 'flex';
+    }, 5000);
+
+    loading.querySelector('button').addEventListener('click', function () {
+        loading.style.display = 'none';
+    });
+
     const formData = {};
     const fields = document.querySelectorAll('input, select');
     fields.forEach(field => {

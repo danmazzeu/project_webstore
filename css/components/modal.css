@@ -21,14 +21,14 @@
 .modal > .card > div > i {
     color: #777;
     display: inline-block;
-    font-size: 50px;
+    font-size: 40px;
     animation: rotate 1s linear infinite;
     transform-origin: center center;
 }
 
 .modal > .card > h1 {
-    font-size: 18px;
-    font-weight: 900;
+    font-size: 16px;
+    font-weight: 600;
     color: #000;
     text-transform: uppercase;
 

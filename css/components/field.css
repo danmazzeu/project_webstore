@@ -24,7 +24,6 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #fff;
-    text-transform: uppercase;
 }
 
 .field > input.error,
