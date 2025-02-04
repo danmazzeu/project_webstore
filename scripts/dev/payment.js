@@ -69,22 +69,39 @@ $(function() {
 
     paymentButton.addEventListener('click', async (event) => {
         event.preventDefault();
-
+    
         if (!validateForm()) {
             return;
-        } else {
-            let html = '';
-
-            const fields = document.querySelectorAll('input, select');
-            fields.forEach(field => {
-                html += field.id + ': ' + field.value + "<br>"
+        }
+    
+        let html = '';
+        const fields = document.querySelectorAll('input, select');
+        fields.forEach(field => {
+            html += field.id + ': ' + field.value + "<br>";
+        });
+    
+        try {
+            const response = await fetch(`https://codesnode-production.up.railway.app/sendmail`, {
+                method: 'POST', // Use POST!
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `message=${encodeURIComponent(html)}`
             });
-
-            fetch(`https://codesnode-production.up.railway.app/sendmail?message=${html}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            });
+    
+            if (!response.ok) {
+                const errorText = await response.text(); // Get error details from server
+                throw new Error(`Server Error: ${response.status} - ${errorText}`); // More info
+            }
+    
+            const data = await response.json(); // Try to parse JSON
+    
+            console.log(data);
+            alert("Payment submitted successfully!"); // Or a more user-friendly message
+    
+        } catch (error) {
+            console.error("Error submitting payment:", error);
+            alert("An error occurred during payment submission. Please try again later.");
         }
     });
 
