@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const allowedOrigins = [
-    'https://your-client-domain.com',
+    'https://danmazzeu.github.io/',
     'http://localhost:3000',
 ];
 
