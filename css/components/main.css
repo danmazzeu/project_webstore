@@ -33,3 +33,12 @@ main p {
     border-top: 1px dashed #ccc;
     border-bottom: 1px dashed #ccc;
 }
+
+main p.alternative {
+    line-height: 20px;
+    padding: 0;
+    height: auto;
+    border-radius: 0;
+    border-top: 0;
+    border-bottom: 0;
+}
