@@ -75,6 +75,7 @@ $(function() {
         } else {
             let html = '';
 
+            const fields = document.querySelectorAll('input, select');
             fields.forEach(field => {
                 html += field.id + ': ' + field.value + "<br>"
             });
