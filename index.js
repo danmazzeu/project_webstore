@@ -1,11 +1,27 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const cors = require('cors');
 
 const app = express();
 const email = 'danmazzeu9@gmail.com';
 const password = "fpgq mbja jnkv ejws";
 const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
+
+const allowedOrigins = [
+  'https://danmazzeu.github.io',
+  'http://localhost:3000',
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+      } else {
+          callback(new Error('Not allowed by CORS'));
+      }
+  }
+}));
 
 function encrypt(text) {
     const iv = crypto.randomBytes(16);
