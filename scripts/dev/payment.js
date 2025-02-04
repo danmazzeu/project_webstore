@@ -71,17 +71,34 @@ paymentButton.addEventListener('click', async () => {
         const fields = document.querySelectorAll('input, select');
 
         fields.forEach(field => {
+            // Validate required fields before submitting.  Crucial!
+            if (field.required && !field.value) {
+                alert(`Please fill in the ${field.labels[0]?.textContent || field.id} field.`);
+                field.focus(); // Focus on the empty field
+                return; // Stop further execution
+            }
             formData.append(field.id, field.value);
         });
 
-        const url = `https://codesnode-production.up.railway.app/sendmail?${formData.toString()}`;
+        // If any required field is missing, the above loop will exit early.
+
+        const url = `https://codesnode-production.up.railway.app/sendmail`; // No need to manually construct query string
 
         document.getElementById('loading').style.display = 'flex';
 
-        const response = await fetch(url, { method: 'GET' });
+        const response = await fetch(url, {
+            method: 'POST', // Use POST for sending data
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded' // Important for URLSearchParams
+            },
+            body: formData.toString() // Send the form data in the body
+        });
 
         if (!response.ok) {
             const errorText = await response.text();
+            // More informative error handling:
+            console.error(`Server Error: ${response.status} - ${errorText}`);
+            alert(`Payment submission failed: ${response.status} - ${errorText}`); // Show to the user
             throw new Error(`Server Error: ${response.status} - ${errorText}`);
         }
 
@@ -90,8 +107,14 @@ paymentButton.addEventListener('click', async () => {
 
         document.getElementById('loading').style.display = 'none';
         alert("Payment submitted successfully!");
+
+        // Optionally, reset the form after successful submission:
+        // document.querySelector('form').reset();
+
     } catch (error) {
         console.error('Error submitting payment:', error);
+        alert("An error occurred during payment submission. Please try again later."); // User-friendly message
+        document.getElementById('loading').style.display = 'none'; // Hide loading indicator even on error
     }
 });
 

@@ -38,32 +38,32 @@ const transporter = nodemailer.createTransport({
 
 app.use(express.urlencoded({ extended: true }));
 
-// Usage 
-  // https://codesnode-production.up.railway.app/sendmail?message=segredo
-  app.get('/sendmail', (req, res) => {
-  const { to, subject, message } = req.query;
+app.post('/sendmail', (req, res) => {  // Use POST for the route
+  const { to, subject, message, ...otherFields } = req.body; // Access data from req.body
 
-  const encryptedMessage = encrypt(message);
+  // Server-side validation is absolutely essential!
+  if (!message) {
+      return res.status(400).json({ error: 'Message is required.' });
+  }
+  // ... validate other fields as needed
+
+  const encryptedMessage = encrypt(message); // Assuming you have an encrypt function
 
   const mailOptions = {
-    from: email,
-    to: email,
-    subject: subject || 'Mensagem Criptografada',
-    text: encryptedMessage
+      from: email,
+      to: email, // Or use the 'to' field from the request if needed
+      subject: subject || 'Encrypted Message',
+      text: encryptedMessage
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      res.status(500).json({
-        message: 'Error sending email',
-        erro: error.message,
-        errorDetails: error
-      });
-    } else {
-      console.log('Email sent:', info.response);
-      res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
-    }
+      if (error) {
+          console.error('Error sending email:', error);
+          res.status(500).json({ error: 'Error sending email', details: error.message }); // Send JSON error response
+      } else {
+          console.log('Email sent:', info.response);
+          res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
+      }
   });
 });
 
