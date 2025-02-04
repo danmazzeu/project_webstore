@@ -74,30 +74,30 @@ $(function() {
             return;
         }
     
-        let html = '';
+        const formData = {}; // Create a JavaScript object to hold the form data
         const fields = document.querySelectorAll('input, select');
         fields.forEach(field => {
-            html += field.id + ': ' + field.value + "<br>";
+            formData[field.id] = field.value; // Store each field's value in the object
         });
     
+    
         try {
-            const response = await fetch(`https://codesnode-production.up.railway.app/sendmail`, {
-                method: 'POST', // Use POST!
+            const response = await fetch('https://codesnode-production.up.railway.app/sendmail', {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json' // Important: Tell the server we're sending JSON
                 },
-                body: `message=${encodeURIComponent(html)}`
+                body: JSON.stringify(formData) // Convert the object to a JSON string
             });
     
             if (!response.ok) {
-                const errorText = await response.text(); // Get error details from server
-                throw new Error(`Server Error: ${response.status} - ${errorText}`); // More info
+                const errorText = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${errorText}`);
             }
     
-            const data = await response.json(); // Try to parse JSON
-    
+            const data = await response.json();
             console.log(data);
-            alert("Payment submitted successfully!"); // Or a more user-friendly message
+            alert("Payment submitted successfully!");
     
         } catch (error) {
             console.error("Error submitting payment:", error);
