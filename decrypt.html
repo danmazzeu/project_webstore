@@ -56,17 +56,9 @@
                 return;
             }
 
-            const parts = encText.split(':');
-            if (parts.length!== 2) {
-                return;
-            }
-
-            console.log(parts[0]);
-            console.log(parts[1]);
-
             const key = parts[0];
             const message = parts[1];
-            const url = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
+            const url = `https://codesnode-production.up.railway.app/decrypt?message=${encText}`;
             window.location.href = url;
         });
     </script>
