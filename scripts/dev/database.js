@@ -80,7 +80,7 @@ export const products = [
         description: "5G na palma da sua mão com o iPhone 12 mini! Tela Super Retina XDR vibrante, chip A14 Bionic poderoso e design compacto que cabe no seu bolso. Tecnologia de ponta em um tamanho perfeito para o seu dia a dia.",
         colors: ["Preto", "Branco", "Azul", "Verde", "Vermelho"],
         quantity: 18,
-        value: 699,
+        value: 1499,
         memories: ["64GB", "128GB", "256GB"]
     }, {
         id: productIdCounter++,
@@ -89,10 +89,10 @@ export const products = [
         description: "A nova geração do iPhone: iPhone 12. 5G, tela Super Retina XDR e chip A14 Bionic. Tudo o que você espera de um smartphone, elevado a um novo nível.",
         colors: ["Preto", "Branco", "Azul", "Verde", "Vermelho"],
         quantity: 22,
-        value: 799,
+        value: 1599,
         memories: ["64GB", "128GB", "256GB"]
     }, {
-        iid: productIdCounter++,
+        id: productIdCounter++,
         name: "iPhone 12 Pro",
         image: "images/iphone_12_pro.avif",
         description: "O Pro está no nome: iPhone 12 Pro. Sistema de câmera Pro, tela Super Retina XDR com ProMotion e chip A14 Bionic. A ferramenta definitiva para profissionais e entusiastas.",
