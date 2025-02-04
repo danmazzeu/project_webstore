@@ -42,11 +42,7 @@
                     return;
                 }
         
-                const parts = encText.split(':');
-                const key = parts[0];
-                const message = parts[1];
-        
-                window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
+                window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${encText}`;
             });
         </script>
     </body>
