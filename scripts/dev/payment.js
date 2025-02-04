@@ -213,6 +213,7 @@ const id = urlParams.get('id');
 const model = urlParams.get('model');
 const quantity = urlParams.get('quantity');
 const color = urlParams.get('color');
+const installmentsSelect = document.getElementById('installments');
 const price = urlParams.get('price');
 const total = parseFloat(price) * parseInt(quantity);
 const resumeText = `Modelo: ${model}<br>Cor: ${color}<br>Unidades selecionadas: ${quantity}<br>Total: R$ ${total.toFixed(2)}`;
@@ -220,3 +221,15 @@ const ramdomOrder = Math.floor(Math.random() * 9000) + 1000;
 
 document.getElementById('order').innerHTML = 'Pedido: #' + ramdomOrder;
 document.querySelector('#resume p').innerHTML = resumeText;
+
+function updateInstallments(total) {
+    installmentsSelect.innerHTML = '<option value="null" disabled selected>Selecione</option>';
+
+    for (let i = 1; i <= 12; i++) {
+        const installmentValue = total / i;
+        const formattedValue = installmentValue.toFixed(2).replace('.', ',');
+        installmentsSelect.innerHTML += `<option value="${i}">${i}x de R$ ${formattedValue}</option>`;
+    }
+}
+
+updateInstallments(total);

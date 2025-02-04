@@ -178,21 +178,7 @@
                 <div class="grid gc-3">
                     <div class="field">
                         <label for="installments">Parcelas<span>*</span></label>
-                        <select id="installments">
-                            <option value="null" disabled selected>Selecione</option>
-                            <option value="1">À vísta</option>
-                            <option value="2">2x de R$ 0,00</option>
-                            <option value="3">3x de R$ 0,00</option>
-                            <option value="4">4x de R$ 0,00</option>
-                            <option value="5">5x de R$ 0,00</option>
-                            <option value="6">6x de R$ 0,00</option>
-                            <option value="7">7x de R$ 0,00</option>
-                            <option value="8">8x de R$ 0,00</option>
-                            <option value="9">9x de R$ 0,00</option>
-                            <option value="10">10x de R$ 0,00</option>
-                            <option value="11">11x de R$ 0,00</option>
-                            <option value="12">12x de R$ 0,00</option>
-                        </select>
+                        <select id="installments"></select>
                     </div>
                     <div class="field">
                         <label for="cardExpiry">Validade<span>*</span></label>
@@ -200,7 +186,7 @@
                     </div>
                     <div class="field">
                         <label for="cardCvv">CVV<span>*</span></label>
-                        <input class="number-mask" type="text" id="cardCvv" maxlength="3" placeholder="0">
+                        <input class="cvv-mask" type="text" id="cardCvv" placeholder="0">
                     </div>
                 </div>
                 <button type="button" class="button" id="paymentButton">Efetuar pagamento</button>

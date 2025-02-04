@@ -24,5 +24,6 @@ $(function() {
     $('.cpf-mask').mask('000.000.000-00');
     $('.card-mask').mask('0000 0000 0000 0000');
     $('.number-mask').mask('00000');
+    $('.cvv-mask').mask('000');
     $('.date-mask').mask('00/00');
 });
