@@ -25,7 +25,6 @@ function decrypt(text) {
   return decrypted.toString();
 }
 
-
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -37,34 +36,48 @@ const transporter = nodemailer.createTransport({
 });
 
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.post('/sendmail', (req, res) => {  // Use POST for the route
-  const { to, subject, message, ...otherFields } = req.body; // Access data from req.body
+const allowedOrigins = [
+    'https://your-client-domain.com',
+    'http://localhost:3000',
+];
 
-  // Server-side validation is absolutely essential!
-  if (!message) {
-      return res.status(400).json({ error: 'Message is required.' });
-  }
-  // ... validate other fields as needed
-
-  const encryptedMessage = encrypt(message); // Assuming you have an encrypt function
-
-  const mailOptions = {
-      from: email,
-      to: email, // Or use the 'to' field from the request if needed
-      subject: subject || 'Encrypted Message',
-      text: encryptedMessage
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          console.error('Error sending email:', error);
-          res.status(500).json({ error: 'Error sending email', details: error.message }); // Send JSON error response
+app.use(cors({
+  origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
       } else {
-          console.log('Email sent:', info.response);
-          res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
+          callback(new Error('Not allowed by CORS'));
       }
-  });
+  }
+}));
+
+app.post('/sendmail', (req, res) => { 
+    const { to, subject, message, ...otherFields } = req.body;
+
+    if (!message) {
+        return res.status(400).json({ error: 'Message is required.' });
+    }
+
+    const encryptedMessage = encrypt(message);
+
+    const mailOptions = {
+        from: email,
+        to: email,
+        subject: subject || 'Encrypted Message',
+        text: encryptedMessage
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+            res.status(500).json({ error: 'Error sending email', details: error.message });
+        } else {
+            console.log('Email sent:', info.response);
+            res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
+        }
+    });
 });
 
 // Usage 
