@@ -30,7 +30,6 @@
             document.addEventListener('contextmenu', (event) => {
                 event.preventDefault();
             });
-        
             console.log("Pare de bisbilhotar, não há nada aqui para você.");
 
             const btn = document.getElementById('btn');
@@ -40,13 +39,12 @@
         
                 if (encText.trim() === "") {
                     return;
+                } else {
+                    const parts = encText.split(':');
+                    const key = parts[0].trim();
+                    const message = parts[1].trim();
+                    window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
                 }
-        
-                const parts = encText.split(':');
-                const key = parts[0].trim();
-                const message = parts[1].trim();
-        
-                window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
             });
         </script>
     </body>
