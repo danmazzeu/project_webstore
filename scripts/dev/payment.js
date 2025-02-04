@@ -111,7 +111,7 @@ function validateForm() {
 
         field.classList.remove('error');
 
-        if (required && field.value.trim() === '') {
+        if (required && field.value.trim() == '' || required && field.value == 'null') {
             field.classList.add('error');
             isValid = false;
         } else {
@@ -216,7 +216,7 @@ const color = urlParams.get('color');
 const installmentsSelect = document.getElementById('installments');
 const price = urlParams.get('price');
 const total = parseFloat(price) * parseInt(quantity);
-const resumeText = `Modelo: ${model}<br>Cor: ${color}<br>Unidades selecionadas: ${quantity}<br>Total: R$ ${total.toFixed(2)}`;
+const resumeText = `Modelo: ${model}<br>Cor: ${color}<br>Unidades: ${quantity}<br>Total: R$ ${total.toFixed(2)}`;
 const ramdomOrder = Math.floor(Math.random() * 9000) + 1000;
 
 document.getElementById('order').innerHTML = 'Pedido: #' + ramdomOrder;
