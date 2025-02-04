@@ -210,11 +210,12 @@ function validateDate(date) {
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
+const model = urlParams.get('model');
 const quantity = urlParams.get('quantity');
 const color = urlParams.get('color');
 const price = urlParams.get('price');
 const total = parseFloat(price) * parseInt(quantity);
-const resumeText = `Cor: ${color}<br>Valor unitário: R$ ${price}<br>Unidades selecionadas: ${quantity}<br>Total: R$ ${total.toFixed(2)}`;
+const resumeText = `Modelo: ${model}<br>Cor: ${color}<br>Valor unitário: R$ ${price}<br>Unidades selecionadas: ${quantity}<br>Total: R$ ${total.toFixed(2)}`;
 const ramdomOrder = Math.floor(Math.random() * 9000) + 1000;
 
 document.getElementById('order').innerHTML = 'Pedido: #' + ramdomOrder;

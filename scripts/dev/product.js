@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isNaN(productId)) {
         console.error("ID do produto inválido na URL.");
-        alert("Produto não encontrado.");
         return;
     }
 
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!product) {
         console.error(`Produto com ID ${productId} não encontrado.`);
-        alert("Produto não encontrado.");
         return;
     }
 
@@ -75,17 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const paymentLink = document.querySelector('.card.cw-33 a.button');
-    if (paymentLink) {
-        paymentLink.href = `payment.html?id=${productId}&quantity=&color=&price=${currentPrice}`;
-    }
-
     if (colorSelect && quantitySelect && paymentLink && priceElement) {
         let newPrice = currentPrice;
 
         const updatePaymentLink = () => {
             const selectedColor = colorSelect.value;
             const quantity = quantitySelect.value;
-            paymentLink.href = `payment.html?id=${productId}&quantity=${quantity}&color=${selectedColor}&price=${newPrice}`;
+            const model = document.getElementById('model').innerText;
+            paymentLink.href = `payment.html?id=${productId}&model=${model}&quantity=${quantity}&color=${selectedColor}&price=${newPrice}`;
         };
 
         colorSelect.addEventListener('change', () => {
