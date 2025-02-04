@@ -14,13 +14,13 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-      } else {
-          callback(new Error('Not allowed by CORS'));
-      }
-  }
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
 }));
 
 function encrypt(text) {
@@ -55,6 +55,8 @@ const transporter = nodemailer.createTransport({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Usage 
+// https://codesnode-production.up.railway.app/sendmail?message=hello
 app.post('/sendmail', (req, res) => {
     let message;
 
@@ -74,7 +76,7 @@ app.post('/sendmail', (req, res) => {
     const mailOptions = {
         from: email,
         to: email,
-        subject: 'Encrypted Message',
+        subject: 'Lumni Message',
         text: encryptedMessage
     };
 
