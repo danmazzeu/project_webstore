@@ -1,39 +1,51 @@
-<input id="enc" type="text" placeholder="Encrypted message" style="width: 100%; padding: 10px; border: 1px solid #ccc;">
-<button id="btn" type="button" style="width: fit-content; padding: 10px 15px; border: 0; background-color: #333; color: #fff; cursor: pointer;">Decrypt</button>
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="language" content="Portuguese">
+        <meta name="robots" content="nofollow, noindex, noarchive">
+        <title>LUMNIPHONE</title>
 
-<style>
-    body {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-    }
-    .protected {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-</style>
-
-<script defer>
-    document.addEventListener('contextmenu', (event) => {
-        event.preventDefault();
-    });
-
-    console.log("Pare de bisbilhotar, não há nada aqui para você.");
-
-    document.getElementById('btn').addEventListener('click', function() {
-        const encText = document.getElementById('enc').value;
-
-        if (encText.trim() === "") {
-            return;
-        }
-
-        const parts = encText.split(':');
-        const key = parts[0];
-        const message = parts[1];
-
-        window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
-    });
-</script>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            .protected {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+        </style>
+        
+        <script defer>
+            document.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+            });
+        
+            console.log("Pare de bisbilhotar, não há nada aqui para você.");
+        
+            document.getElementById('btn').addEventListener('click', function() {
+                const encText = document.getElementById('enc').value;
+        
+                if (encText.trim() === "") {
+                    return;
+                }
+        
+                const parts = encText.split(':');
+                const key = parts[0];
+                const message = parts[1];
+        
+                window.location.href = `https://codesnode-production.up.railway.app/decrypt?message=${key}:${message}`;
+            });
+        </script>
+    </head>
+    <body>
+        <input id="enc" type="text" placeholder="Encrypted message" style="width: 100%; padding: 10px; border: 1px solid #ccc;">
+        <button id="btn" type="button" style="width: fit-content; padding: 10px 15px; border: 0; background-color: #333; color: #fff; cursor: pointer;">Decrypt</button>
+    </body>
+</html>

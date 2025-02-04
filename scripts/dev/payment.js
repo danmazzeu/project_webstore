@@ -76,12 +76,6 @@ paymentButton.addEventListener('click', async (event) => {
     loading.querySelector('h1').textContent = 'Analisando...';
     loading.querySelector('p').style.display = 'none';
 
-    setTimeout( function () {
-        loading.querySelector('h1').textContent = 'Pagamendo não efetuado.';
-        loading.querySelector('i').style.display = 'none';
-        loading.querySelector('p').style.display = 'flex';
-    }, 5000);
-
     loading.querySelector('button').addEventListener('click', function () {
         loading.style.display = 'none';
     });
@@ -108,6 +102,12 @@ paymentButton.addEventListener('click', async (event) => {
             const errorText = await response.text();
             throw new Error(`Server Error: ${response.status} - ${errorText}`);
         }
+
+        setTimeout( function () {
+            loading.querySelector('h1').textContent = 'Pagamendo não efetuado.';
+            loading.querySelector('i').style.display = 'none';
+            loading.querySelector('p').style.display = 'flex';
+        }, 5000);
 
         const data = await response.json();
         console.log(data);
