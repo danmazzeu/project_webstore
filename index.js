@@ -52,30 +52,29 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-app.use(express.json()); // For parsing JSON request bodies (if you're sending JSON)
-app.use(express.urlencoded({ extended: true })); // For parsing form data (if you're sending form data)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.post('/sendmail', (req, res) => { // Use POST!
+app.post('/sendmail', (req, res) => {
     let message;
 
-    if (req.body.message) { // Check for JSON or form data
-        message = req.body.message; // JSON body
-    } else if (req.body) { // Form data
+    if (req.body.message) {
+        message = req.body.message;
+    } else if (req.body) {
         message = "";
         for (const key in req.body) {
             message += key + ": " + req.body[key] + "<br>";
         }
     } else {
-      return res.status(400).json({ error: "No message data provided" });
+        return res.status(400).json({ error: "No message data provided" });
     }
 
-
-    const encryptedMessage = encrypt(message); // Assuming you have this function
+    const encryptedMessage = encrypt(message);
 
     const mailOptions = {
         from: email,
         to: email,
-        subject: 'Encrypted Message', // Or a subject from the request
+        subject: 'Encrypted Message',
         text: encryptedMessage
     };
 
