@@ -4,9 +4,25 @@ main h1 {
     font-weight: 400;
 }
 
+main h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 main span {
     font-size: 25px;
     font-weight: 1000;
+}
+
+main li > span {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 1000;
+}
+
+main ol {
+    list-style: none;
 }
 
 main p {

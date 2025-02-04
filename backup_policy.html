@@ -8,9 +8,9 @@
         <meta name="description" content="LUMNIPHONE - Pagamento. Celular bom e barato você só encontra em nossa loja! Iphones importados direto dos Estados Unidos para o seu bolso!">
         <meta name="keywords" content="iphone, celular, smartphone, importados, eua, estados unidos, barato, loja, lumniphone, pagamento, cartão de crédito, pix, boleto">
         <meta name="author" content="Anônimo">
-        <meta name="robots" content="nofollow, noindex, noarchive">
+        <meta name="robots" content="follow, index, noarchive">
         <meta name="google" content="notranslate">
-        <meta property="og:title" content="LUMNIPHONE - Produto">
+        <meta property="og:title" content="LUMNIPHONE">
         <meta property="og:description" content="Celular bom e barato você só encontra em nossa loja! Iphones importados direto dos Estados Unidos para o seu bolso!">
         <meta property="og:image" content="https://lumniphone.com.br/images/thumbnail.png">
         <meta property="og:url" content="https://lumniphone.com.br/">
@@ -32,21 +32,12 @@
         <!-- Components Styles -->
         <link rel="stylesheet" href="css/components/container.css">
         <link rel="stylesheet" href="css/components/card.css">
-        <link rel="stylesheet" href="css/components/field.css">
-        <link rel="stylesheet" href="css/components/button.css">
-        <link rel="stylesheet" href="css/components/image.css">
         <link rel="stylesheet" href="css/components/header.css">
         <link rel="stylesheet" href="css/components/main.css">
         <link rel="stylesheet" href="css/components/footer.css">
 
-
         <!-- Global Scripts -->
-        <script defer src="scripts/global/jquery.js"></script>
-        <script defer src="scripts/global/jquery.mask.js"></script>
         <script defer src="scripts/global/protect.js"></script>
-
-        <!-- Dev Scripts -->
-        <script defer src="scripts/dev/product.js" type="module"></script>
     </head>
     <body>
 
@@ -60,28 +51,59 @@
                 <source src="videos/video.mp4" type="video/mp4">
             </video>
         </header>
-        
+
         <!-- Main -->
         <main class="container protected">
-            <section class="card-row">
-                <div class="card cw-66">
-                    <img class="plus" src="images/image.webp">
-                </div>
-                <div class="card cw-33">
-                    <h1 id="model">Produto</h1>
-                    <span>R$ 00.00</span>
-                    <p>Descrição</p>
-                    <div class="grid gc-2">
-                        <div class="field">
-                            <label>Cor<span>*</span></label>
-                            <select id="color"></select>
-                        </div>
-                        <div class="field">
-                            <label>Unidades<span>*</span></label>
-                            <select id="quantity"></select>
-                        </div>
-                    </div>
-                    <a href="payment.html?id=id&quantidade&cor" class="button">Pagamento</a>
+            <section class="grid gc-1">
+                <div class="card">
+                    <h1>Política de Devolução</h1>
+        
+                    <h2>Nosso compromisso</h2>
+                    <p>Buscamos a satisfação total de nossos clientes. Caso não esteja completamente satisfeito com seu iPhone,
+                        oferecemos a opção de devolução, seguindo as condições abaixo:</p>
+        
+                    <h2>Condições para devolução</h2>
+                    <ul>
+                        <li><span class="highlight">Prazo:</span> O cliente tem até [número] dias corridos, a partir da data de
+                            entrega do iPhone, para solicitar a devolução.</li>
+                        <li><span class="highlight">Condição do produto:</span> O iPhone deve ser devolvido em perfeitas condições,
+                            sem sinais de uso, riscos ou danos.</li>
+                        <li><span class="highlight">Embalagem:</span> O iPhone deve ser devolvido na embalagem original, com todos
+                            os acessórios e manuais inclusos.</li>
+                        <li><span class="highlight">Comprovante:</span> É imprescindível apresentar o comprovante de compra (nota
+                            fiscal ou recibo).</li>
+                    </ul>
+        
+                    <h2>Processo de devolução</h2>
+                    <ol>
+                        <li><span class="highlight">Contato:</span> O cliente deve entrar em contato com nossa loja, por telefone
+                            ou e-mail, informando o motivo da devolução e o número do pedido.</li>
+                        <li><span class="highlight">Autorização:</span> Após análise das condições, nossa equipe fornecerá as
+                            instruções para a devolução, incluindo o endereço para envio ou entrega do iPhone.</li>
+                        <li><span class="highlight">Envio/Entrega:</span> O cliente deverá enviar o iPhone, seguindo as
+                            orientações recebidas, ou entregar o produto em nossa loja física. Os custos de envio ficam por
+                            conta do cliente, exceto em casos de defeito de fabricação.</li>
+                        <li><span class="highlight">Análise:</span> Ao receber o iPhone, nossa equipe fará uma análise para
+                            verificar se as condições de devolução foram atendidas.</li>
+                    </ol>
+        
+                    <h2>Exceções</h2>
+                    <ul>
+                        <li><span class="highlight">Desistência:</span> Em caso de desistência da compra, o cliente tem até 7
+                            dias corridos, a partir da data da compra, para solicitar o cancelamento e a devolução do valor
+                            pago.</li>
+                        <li><span class="highlight">Defeito de fabricação:</span> Caso o iPhone apresente defeito de fabricação,
+                            o cliente deve entrar em contato conosco em até [número] dias corridos, a partir da data de
+                            entrega, para que possamos providenciar a troca ou o reembolso.</li>
+                        <li><span class="highlight">Produtos em promoção:</span> Produtos adquiridos em promoção podem ter
+                            condições de devolução diferenciadas, que serão informadas no momento da compra.</li>
+                    </ul>
+        
+                    <h2>Observações</h2>
+                    <ul>
+                        <li>Esta política de devolução é válida para compras realizadas em nossa loja física e online.</li>
+                        <li>Em caso de dúvidas, entre em contato conosco.</li>
+                    </ul>
                 </div>
             </section>
         </main>
@@ -105,6 +127,6 @@
                 </div>
             </section>
         </footer>
-        
+
     </body>
 </html>
