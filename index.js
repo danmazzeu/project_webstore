@@ -2,44 +2,22 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const cors = require('cors');
-const session = require('express-session');
 
 const app = express();
 const email = 'lumniphone@gmail.com';
-const password = "xpyh uuzj lggt xwgm"; // Store this securely!
-const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex'); // Generate ONCE and store securely!
-
-// Session Secret - MUST be long and random.  Don't hardcode in production!
-const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(64).toString('hex');
-
-app.use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === 'production' } // Important for HTTPS in production
-}));
-
-const contadorVisitas = (req, res, next) => {
-    req.session.visitas = (req.session.visitas || 0) + 1; // Cleaner way to increment
-
-    if (req.session.visitas > 4) {
-        return res.redirect('https://www.google.com'); // Add 'return' to stop further processing
-    }
-    next();
-};
+const password = "xpyh uuzj lggt xwgm";
+const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
 
 const allowedOrigins = [
-    'https://danmazzeu.github.io',
-    'http://localhost:3000', // Include BOTH http:// and https:// if needed
-    'http://127.0.0.1:3000', // Sometimes localhost resolves to this
+  'https://danmazzeu.github.io',
+  'http://localhost:3000',
 ];
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) { // Allow requests with no origin (like Postman)
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            console.error("CORS Error: Origin not allowed:", origin); // Log the bad origin
             callback(new Error('Not allowed by CORS'));
         }
     }
@@ -74,7 +52,6 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-app.use(contadorVisitas);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -105,10 +82,10 @@ app.post('/sendmail', (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            //console.error('Error sending email:', error);
+            console.error('Error sending email:', error);
             return res.status(500).json({ error: 'Error sending email', details: error.message });
         } else {
-            //console.log('Email sent:', info.response);
+            console.log('Email sent:', info.response);
             return res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
         }
     });
@@ -119,15 +96,15 @@ app.post('/sendmail', (req, res) => {
 app.get('/decrypt', (req, res) => {
     const { message } = req.query;
     try {
-        if (!message) {
-            return res.status(400).send("Message parameter is missing")
-        }
-        const decryptedMessage = decrypt(message);
-        res.send(`${decryptedMessage}`);
+          if (!message) {
+              return res.status(400).send("Message parameter is missing")
+          }
+          const decryptedMessage = decrypt(message);
+          res.send(`${decryptedMessage}`);
 
     } catch (error) {
-        //console.error("Error decrypting:", error);
-        res.status(500).send("Decryption failed.  Incorrect message format or key.");
+          console.error("Error decrypting:", error);
+          res.status(500).send("Decryption failed.  Incorrect message format or key.");
     }
 });
 
