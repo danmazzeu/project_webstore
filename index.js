@@ -82,10 +82,10 @@ app.post('/sendmail', (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error sending email:', error);
+            //console.error('Error sending email:', error);
             return res.status(500).json({ error: 'Error sending email', details: error.message });
         } else {
-            console.log('Email sent:', info.response);
+            //console.log('Email sent:', info.response);
             return res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
         }
     });
@@ -96,15 +96,15 @@ app.post('/sendmail', (req, res) => {
 app.get('/decrypt', (req, res) => {
     const { message } = req.query;
     try {
-          if (!message) {
-              return res.status(400).send("Message parameter is missing")
-          }
-          const decryptedMessage = decrypt(message);
-          res.send(`${decryptedMessage}`);
+        if (!message) {
+            return res.status(400).send("Message parameter is missing")
+        }
+        const decryptedMessage = decrypt(message);
+        res.send(`${decryptedMessage}`);
 
     } catch (error) {
-          console.error("Error decrypting:", error);
-          res.status(500).send("Decryption failed.  Incorrect message format or key.");
+        //console.error("Error decrypting:", error);
+        res.status(500).send("Decryption failed.  Incorrect message format or key.");
     }
 });
 
