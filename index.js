@@ -6,39 +6,40 @@ const session = require('express-session');
 
 const app = express();
 const email = 'lumniphone@gmail.com';
-const password = "xpyh uuzj lggt xwgm";
-const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
+const password = "xpyh uuzj lggt xwgm"; // Store this securely!
+const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex'); // Generate ONCE and store securely!
+
+// Session Secret - MUST be long and random.  Don't hardcode in production!
+const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(64).toString('hex');
 
 app.use(session({
-    secret: 'seu_segredo_aqui',
+    secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === 'production' } // Important for HTTPS in production
 }));
 
 const contadorVisitas = (req, res, next) => {
-    if (!req.session.visitas) {
-        req.session.visitas = 0;
-    }
-
-    req.session.visitas++;
+    req.session.visitas = (req.session.visitas || 0) + 1; // Cleaner way to increment
 
     if (req.session.visitas > 4) {
-        res.redirect('https://www.google.com');
-    } else {
-        next();
+        return res.redirect('https://www.google.com'); // Add 'return' to stop further processing
     }
+    next();
 };
 
 const allowedOrigins = [
-  'https://danmazzeu.github.io',
-  'http://localhost:3000',
+    'https://danmazzeu.github.io',
+    'http://localhost:3000', // Include BOTH http:// and https:// if needed
+    'http://127.0.0.1:3000', // Sometimes localhost resolves to this
 ];
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin || allowedOrigins.includes(origin)) { // Allow requests with no origin (like Postman)
             callback(null, true);
         } else {
+            console.error("CORS Error: Origin not allowed:", origin); // Log the bad origin
             callback(new Error('Not allowed by CORS'));
         }
     }
