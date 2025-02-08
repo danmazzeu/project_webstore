@@ -75,8 +75,7 @@ paymentButton.addEventListener('click', async (event) => {
     }
 
     if (attempts >= 5) {
-        window.location.href = 'blocked.html';
-        return;
+        window.location.assign = 'https://google.com.br/';
     }
 
     attempts++;
