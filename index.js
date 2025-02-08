@@ -74,25 +74,19 @@ app.use(express.urlencoded({ extended: true }));
 
 // Usage 
 // https://codesnode-production.up.railway.app/sendmail?message=hello
-app.post('/sendmail', (req, res) => {
-    const IP_BLOCK_FILE = 'blocked_ips.json';
-    let blockedIPs = loadBlockedIPs();
+pp.post('/sendmail', (req, res) => {
+    const ip = req.ip || req.connection.remoteAddress || req.headers['x-forwarded-for'];
 
-    function loadBlockedIPs() {
-        try {
-            const data = fs.readFileSync(IP_BLOCK_FILE, 'utf8');
-            return JSON.parse(data);
-        } catch (err) {
-            return {};
-        }
+    if (!ip) {
+        return res.status(400).send("Could not determine IP address.");
     }
 
-    function saveBlockedIPs() {
-        fs.writeFileSync(IP_BLOCK_FILE, JSON.stringify(blockedIPs, null, 2), 'utf8');
+    if (blockedIPs[ip] && blockedIPs[ip].blocked) {
+        console.log(`IP ${ip} is blocked - redirecting to Google.`);
+        return res.redirect('https://www.google.com');
     }
 
     let message;
-
     if (req.body.message) {
         message = req.body.message;
     } else if (req.body) {
@@ -117,7 +111,7 @@ app.post('/sendmail', (req, res) => {
         if (error) {
             console.error('Error sending email:', error);
 
-            if (!blockedIPs[ip]) {
+            if (!blockedIPs[ip]) {  // Use the ip variable here!
                 blockedIPs[ip] = { attempts: 0, blocked: false };
             }
             blockedIPs[ip].attempts++;
@@ -126,14 +120,14 @@ app.post('/sendmail', (req, res) => {
                 blockedIPs[ip].blocked = true;
                 console.log(`IP ${ip} blocked.`);
             }
-            saveBlockedIPs(); // Save the updated blocked IPs to file
+            saveBlockedIPs();
             return res.status(500).json({ error: 'Error sending email', details: error.message });
         } else {
             console.log('Email sent:', info.response);
-            if (blockedIPs[ip]) {
-                delete blockedIPs[ip]; // Remove from attempts if successful
-                saveBlockedIPs(); // Save the updated blocked IPs to file
+            if (blockedIPs[ip]) { // Use the ip variable here!
+                delete blockedIPs[ip];
             }
+            saveBlockedIPs();
             return res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
         }
     });
