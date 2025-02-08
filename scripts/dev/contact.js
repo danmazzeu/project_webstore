@@ -43,7 +43,7 @@ form.addEventListener('submit', async function (event) {
     }
 
     if (attempts >= 5) {
-        window.location.assign = 'https://google.com.br/'
+        window.location.reload();
     }
 
     attempts++;
