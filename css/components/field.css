@@ -18,7 +18,8 @@
 }
 
 .field > input,
-.field > select {
+.field > select,
+.field > textarea {
     width: 100%;
     padding: 15px;
     border-radius: 5px;
@@ -26,7 +27,15 @@
     background-color: #fff;
 }
 
+.field > textarea {
+    resize: vertical;
+    height: 120px;
+    max-height: 170px;
+    transition: none;
+}
+
 .field > input.error,
+.field > textarea.error,
 .field > select.error {
     border: 2px solid red;
 }

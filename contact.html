@@ -32,8 +32,9 @@
         <!-- Components Styles -->
         <link rel="stylesheet" href="css/components/container.css">
         <link rel="stylesheet" href="css/components/card.css">
+        <link rel="stylesheet" href="css/components/field.css">
         <link rel="stylesheet" href="css/components/button.css">
-        <link rel="stylesheet" href="css/components/image.css">
+        <link rel="stylesheet" href="css/components/modal.css">
         <link rel="stylesheet" href="css/components/header.css">
         <link rel="stylesheet" href="css/components/main.css">
         <link rel="stylesheet" href="css/components/footer.css">
@@ -44,9 +45,21 @@
         <script defer src="scripts/global/protect.js"></script>
 
         <!-- Dev Scripts -->
-        <script defer src="scripts/dev/main.js" type="module"></script>
+        <script defer src="scripts/dev/contact.js" type="module"></script>
     </head>
     <body>
+
+        <!-- Modal -->
+        <div id="loading" class="modal">
+            <div class="card cw-33">
+                <div>
+                    <i class="bi bi-arrow-repeat"></i>
+                </div>
+                <h1>Pagamento não efetuado!</h1>
+                <p>Verifique as informações do seu cartão e tente novamente, caso o problema persista, troque o cartão ou entre em contato com sua instituição bancária.</p>
+                <button type="button" class="button">Fechar</button>
+            </div>
+        </div>
 
         <!-- Header -->
         <header class="container protected">
@@ -58,10 +71,38 @@
                 <source src="videos/video.mp4" type="video/mp4">
             </video>
         </header>
-        
+
         <!-- Main -->
-        <main id="products" class="container protected">
-            <section class="grid gc-4"></section>
+        <main class="container protected">
+            <form id="contact-form" class="card cw-100">
+                <div class="grid gc-2">
+                    <div class="field">
+                        <label for="firstName">Nome<span>*</span></label>
+                        <input type="text" id="firstName" placeholder="Digite aqui">
+                    </div>
+                    <div class="field">
+                        <label for="lastName">Sobrenome<span>*</span></label>
+                        <input type="text" id="lastName" placeholder="Digite aqui">
+                    </div>
+                </div>
+                <div class="grid gc-2">
+                    <div class="field">
+                        <label for="subject">Assunto<span>*</span></label>
+                        <input type="text" id="subject" placeholder="Digite aqui">
+                    </div>
+                    <div class="field">
+                        <label for="email">E-mail<span>*</span></label>
+                        <input type="text" id="email" placeholder="Digite aqui">
+                    </div>
+                </div>
+                <div class="grid gc-1">
+                    <div class="field">
+                        <label for="message">Mensagem<span>*</span></label>
+                        <textarea id="message" placeholder="Digite aqui"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="button" id="send">Enviar</button>
+            </form>
         </main>
 
         <!-- Footer -->
@@ -83,6 +124,6 @@
                 </div>
             </section>
         </footer>
-        
+
     </body>
 </html>

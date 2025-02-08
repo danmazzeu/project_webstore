@@ -23,14 +23,9 @@ header > section {
 header > section > h1,
 header > section > h1 > span {
     font-size: 30px;
-    font-weight: 300;
     color: #fff;
     text-transform: uppercase;
     text-shadow: 1px 1px 1px #000;
-}
-
-header > section > h1 > span {
-    font-weight: 900;
 }
 
 header > section > p {

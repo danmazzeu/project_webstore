@@ -71,7 +71,7 @@ paymentButton.addEventListener('click', async (event) => {
         return;
     }
 
-    const loading = document.getElementById('loading')
+    const loading = document.getElementById('loading');
     loading.style.display = 'flex';
     loading.querySelector('h1').textContent = 'Analisando...';
     loading.querySelector('p').style.display = 'none';
