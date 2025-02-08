@@ -71,7 +71,7 @@ app.post('/sendmail', (req, res) => {
 
     if (attempts >= 3) {
         //console.log(`IP ${ip} blocked - redirecting to Google.`);
-        return res.redirect('https://www.google.com');
+        window.location.assign('https://www.google.com');
     }
 
     if (req.body.message) {
