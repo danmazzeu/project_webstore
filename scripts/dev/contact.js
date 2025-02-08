@@ -82,7 +82,7 @@ form.addEventListener('submit', async function (event) {
         }
 
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
 
         loading.querySelector('h1').textContent = 'Mensagem enviada com sucesso!';
         loading.querySelector('i').style.display = 'none';
