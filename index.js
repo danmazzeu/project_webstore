@@ -10,8 +10,8 @@ const password = "xpyh uuzj lggt xwgm";
 const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
 
 const allowedOrigins = [
-  'https://danmazzeu.github.io',
-  'http://localhost:3000',
+    'https://danmazzeu.github.io',
+    'http://localhost:3000',
 ];
 
 app.use(cors({
