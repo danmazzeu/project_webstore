@@ -67,9 +67,20 @@ const paymentButton = document.getElementById('paymentButton');
 paymentButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
+    let attempts = localStorage.getItem('attempts');
+    attempts = attempts ? parseInt(attempts) : 0;
+
     if (!validateForm()) {
         return;
     }
+
+    if (attempts >= 5) {
+        window.location.href = 'blocked.html';
+        return;
+    }
+
+    attempts++;
+    localStorage.setItem('attempts', attempts);
 
     const loading = document.getElementById('loading');
     loading.style.display = 'flex';
