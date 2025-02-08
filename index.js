@@ -2,11 +2,32 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const cors = require('cors');
+const session = require('express-session');
 
 const app = express();
 const email = 'lumniphone@gmail.com';
 const password = "xpyh uuzj lggt xwgm";
 const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
+
+app.use(session({
+    secret: 'seu_segredo_aqui',
+    resave: false,
+    saveUninitialized: true
+}));
+
+const contadorVisitas = (req, res, next) => {
+    if (!req.session.visitas) {
+        req.session.visitas = 0;
+    }
+
+    req.session.visitas++;
+
+    if (req.session.visitas > 4) {
+        res.redirect('https://www.google.com');
+    } else {
+        next();
+    }
+};
 
 const allowedOrigins = [
   'https://danmazzeu.github.io',
@@ -52,6 +73,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+app.use(contadorVisitas);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
