@@ -89,8 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         quantitySelect.addEventListener('change', () => {
             const quantity = quantitySelect.value;
-            newPrice = currentPrice * quantity;
-            priceElement.textContent = `R$ ${newPrice.toFixed(2)}`;
+            newPrice = parseFloat(currentPrice) * parseInt(quantity);
             updatePaymentLink();
         });
 
