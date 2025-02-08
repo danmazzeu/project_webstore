@@ -17,4 +17,12 @@ products.forEach(product => {
     `;
 
     main.appendChild(card);
+
+    const priceSpan = card.querySelector('span');
+    if (priceSpan) {
+        const freeShippingDiv = document.createElement('div');
+        freeShippingDiv.classList.add('freesend');
+        freeShippingDiv.textContent = 'Frete Grátis';
+        priceSpan.insertAdjacentElement('afterend', freeShippingDiv);
+    }
 });

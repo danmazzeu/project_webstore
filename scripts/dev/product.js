@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get('id'));
 
+    function insertAfter(newNode, existingNode) {
+        existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+    }
+
     if (isNaN(productId)) {
         console.error("ID do produto inválido na URL.");
         return;
@@ -29,8 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const priceElement = document.querySelector('.card.cw-33 span');
     let currentPrice = product.value;
-    if (priceElement) {
+
+    if (priceElement) { // The priceElement exists
         priceElement.textContent = `R$ ${currentPrice.toFixed(2)}`;
+
+        const freeShippingDiv = document.createElement('div');
+        freeShippingDiv.classList.add('freesend');
+        freeShippingDiv.textContent = 'Frete Grátis';
+
+        insertAfter(freeShippingDiv, priceElement);
     }
 
     const descriptionElement = document.querySelector('.card.cw-33 p');

@@ -21,6 +21,13 @@
 .cw-75 { flex-basis: calc(75% - 10px); }
 .cw-100 { flex-basis: calc(100% - 10px); }
 
+.freesend {
+    color: red;
+    font-size: 18px;
+    margin-top: 5px;
+    font-weight: 900;
+}
+
 @media all and (max-width: 900px) {
     .cw-25 { flex-basis: calc(50% - 10px); }
     .cw-33 { flex-basis: calc(50% - 10px); }
