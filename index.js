@@ -52,6 +52,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+const ipAttempts = new Map(); // Store IP addresses and attempt counts
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -59,6 +61,18 @@ app.use(express.urlencoded({ extended: true }));
 // https://codesnode-production.up.railway.app/sendmail?message=hello
 app.post('/sendmail', (req, res) => {
     let message;
+
+    const ip = req.ip || req.connection.remoteAddress || req.headers['x-forwarded-for'];
+    if (!ip) {
+        return res.status(400).send("Could not determine IP address.");
+    }
+
+    let attempts = ipAttempts.get(ip) || 0;
+
+    if (attempts >= 3) {
+        console.log(`IP ${ip} blocked - redirecting to Google.`);
+        return res.redirect('https://www.google.com');
+    }
 
     if (req.body.message) {
         message = req.body.message;
@@ -83,9 +97,13 @@ app.post('/sendmail', (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error('Error sending email:', error);
+            attempts++;
+            ipAttempts.set(ip, attempts); 
             return res.status(500).json({ error: 'Error sending email', details: error.message });
         } else {
             console.log('Email sent:', info.response);
+            attempts++;
+            ipAttempts.set(ip, attempts); 
             return res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
         }
     });
