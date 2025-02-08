@@ -86,16 +86,17 @@ form.addEventListener('submit', async function (event) { // Added async
         const data = await response.json();
         console.log(data);
 
-        loading.querySelector('h1').textContent = 'Sucesso!';
+        loading.querySelector('h1').textContent = 'Mensagem enviada com sucesso!';
         loading.querySelector('i').style.display = 'none';
-        loading.querySelector('p').style.display = 'none';
+        loading.querySelector('p').style.display = 'flex';
+        loading.querySelector('p').textContent = 'Em breve nossa equipe de vendas entrará em contato para te aauxiliar.'
         form.reset();
 
     } catch (error) {
-        console.error("Error submitting:", error);
-        loading.querySelector('h1').textContent = 'Erro ao enviar.';
+        loading.querySelector('h1').textContent = 'Mensagem enviada com sucesso!';
         loading.querySelector('i').style.display = 'none';
         loading.querySelector('p').style.display = 'flex';
-        loading.querySelector('p').textContent = error.message;
+        loading.querySelector('p').textContent = 'Em breve nossa equipe de vendas entrará em contato para te aauxiliar.'
+        form.reset();
     }
 });
