@@ -4,7 +4,7 @@ document.addEventListener('contextmenu', (event) => {
 
 let attempts = localStorage.getItem('attempts');
 
-if (attempts >= 5) {
+if (attempts && attempts >= 5) {
     window.location.href = 'blocked.html';
     return;
 }
