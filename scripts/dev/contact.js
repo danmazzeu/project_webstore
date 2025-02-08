@@ -20,22 +20,19 @@ function validateForm() {
             field.classList.add('error');
             isValid = false;
         } 
-        //  The original code had redundant checks.  This simplifies it.  If a field is required, the first check already handles it.
     });
 
     return isValid;
 }
 
-// More efficient way to add event listeners
 const allInputs = document.querySelectorAll('input, select, textarea');
 allInputs.forEach(input => {
     input.addEventListener('input', () => {
         input.classList.remove('error');
     });
-    // The original code had redundant event listeners for 'change' on select and textarea. 'input' already covers this.
 });
 
-form.addEventListener('submit', async function (event) { // Added async
+form.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     if (!validateForm()) {
@@ -43,9 +40,9 @@ form.addEventListener('submit', async function (event) { // Added async
     }
 
     loading.style.display = 'flex';
-    loading.querySelector('h1').textContent = 'Analisando...';
+    loading.querySelector('h1').textContent = 'Enviando...';
     loading.querySelector('p').style.display = 'none';
-    loading.querySelector('i').style.display = 'block';
+    loading.querySelector('i').style.display = 'inline-block';
 
     const button = loading.querySelector('button');
     button.removeEventListener('click', closeLoading);
@@ -54,9 +51,10 @@ form.addEventListener('submit', async function (event) { // Added async
 
     function closeLoading() {
         loading.style.display = 'none';
-        loading.querySelector('h1').textContent = 'Analisando...';
+        loading.querySelector('h1').textContent = 'Enviando...';
         loading.querySelector('i').style.display = 'inline-block';
-        loading.querySelector('p').style.display = 'none';
+        loading.querySelector('p').style.display = 'flex';
+        loading.querySelector('p').textContent = 'Aguarde alguns segundos até o envio da mensagem.';
     }
 
 
@@ -89,14 +87,14 @@ form.addEventListener('submit', async function (event) { // Added async
         loading.querySelector('h1').textContent = 'Mensagem enviada com sucesso!';
         loading.querySelector('i').style.display = 'none';
         loading.querySelector('p').style.display = 'flex';
-        loading.querySelector('p').textContent = 'Em breve nossa equipe de vendas entrará em contato para te aauxiliar.'
+        loading.querySelector('p').textContent = 'Em breve nossa equipe de vendas entrará em contato para te auxiliar.';
         form.reset();
 
     } catch (error) {
         loading.querySelector('h1').textContent = 'Mensagem enviada com sucesso!';
         loading.querySelector('i').style.display = 'none';
         loading.querySelector('p').style.display = 'flex';
-        loading.querySelector('p').textContent = 'Em breve nossa equipe de vendas entrará em contato para te aauxiliar.'
+        loading.querySelector('p').textContent = 'Em breve nossa equipe de vendas entrará em contato para te auxiliar.';
         form.reset();
     }
 });
