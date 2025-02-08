@@ -4,8 +4,8 @@ const crypto = require('crypto');
 const cors = require('cors');
 
 const app = express();
-const email = 'danmazzeu9@gmail.com';
-const password = "fpgq mbja jnkv ejws";
+const email = 'lumniphone@gmail.com';
+const password = "xpyh uuzj lggt xwgm";
 const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
 
 const allowedOrigins = [
