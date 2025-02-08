@@ -110,7 +110,7 @@ paymentButton.addEventListener('click', async (event) => {
         }, 5000);
 
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
     } catch (error) {
         console.error("Error submitting payment:", error);
     }
