@@ -11,6 +11,7 @@ const ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
 const allowedOrigins = [
   'https://danmazzeu.github.io',
   'http://localhost:3000',
+  'https://www.google.com/',
 ];
 
 app.use(cors({
@@ -71,7 +72,7 @@ app.post('/sendmail', (req, res) => {
 
     if (attempts >= 3) {
         //console.log(`IP ${ip} blocked - redirecting to Google.`);
-        window.location.assign('https://www.google.com');
+        return res.redirect('');
     }
 
     if (req.body.message) {
