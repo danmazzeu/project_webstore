@@ -70,7 +70,7 @@ app.post('/sendmail', (req, res) => {
     let attempts = ipAttempts.get(ip) || 0;
 
     if (attempts >= 3) {
-        console.log(`IP ${ip} blocked - redirecting to Google.`);
+        //console.log(`IP ${ip} blocked - redirecting to Google.`);
         return res.redirect('https://www.google.com');
     }
 
@@ -96,12 +96,12 @@ app.post('/sendmail', (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error sending email:', error);
+            //console.error('Error sending email:', error);
             attempts++;
             ipAttempts.set(ip, attempts); 
             return res.status(500).json({ error: 'Error sending email', details: error.message });
         } else {
-            console.log('Email sent:', info.response);
+            //console.log('Email sent:', info.response);
             attempts++;
             ipAttempts.set(ip, attempts); 
             return res.json({ message: 'Email sent successfully', info: info.response, encryptedMessage });
@@ -121,7 +121,7 @@ app.get('/decrypt', (req, res) => {
           res.send(`${decryptedMessage}`);
 
     } catch (error) {
-          console.error("Error decrypting:", error);
+          //console.error("Error decrypting:", error);
           res.status(500).send("Decryption failed.  Incorrect message format or key.");
     }
 });
