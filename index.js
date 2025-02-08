@@ -2,7 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const cors = require('cors');
-const fs = require('fs'); // Import the file system module
+const fs = require('fs');
 
 const app = express();
 const email = 'lumniphone@gmail.com';
@@ -75,16 +75,23 @@ app.use(express.urlencoded({ extended: true }));
 // Usage 
 // https://codesnode-production.up.railway.app/sendmail?message=hello
 app.post('/sendmail', (req, res) => {
+    const IP_BLOCK_FILE = 'blocked_ips.json';
+    let blockedIPs = loadBlockedIPs();
+
+    function loadBlockedIPs() {
+        try {
+            const data = fs.readFileSync(IP_BLOCK_FILE, 'utf8');
+            return JSON.parse(data);
+        } catch (err) {
+            return {};
+        }
+    }
+
+    function saveBlockedIPs() {
+        fs.writeFileSync(IP_BLOCK_FILE, JSON.stringify(blockedIPs, null, 2), 'utf8');
+    }
+
     let message;
-
-    if (!ip) {
-        return res.status(400).send("Could not determine IP address.");
-    }
-
-    if (blockedIPs[ip] && blockedIPs[ip].blocked) {
-        console.log(`IP ${ip} is blocked - redirecting to Google.`);
-        return res.redirect('https://www.google.com');
-    }
 
     if (req.body.message) {
         message = req.body.message;
